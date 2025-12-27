@@ -3,15 +3,15 @@ import { FiUsers, FiUser, FiClock } from "react-icons/fi";
 
 export default function Mesa() {
   const [mesas] = useState([
-    { numero: "001", status: "Livre", vendedor: "João", cliente: "-", total: 0 },
-    { numero: "002", status: "Livre", vendedor: "Maria", cliente: "-", total: 0 },
-    { numero: "003", status: "Ocupada", vendedor: "Ana", cliente: "Carlos", total: 27.5 },
-    { numero: "004", status: "Ocupada", vendedor: "Pedro", cliente: "Lucas", total: 21.7 },
-    { numero: "005", status: "Livre", vendedor: "João", cliente: "-", total: 0 },
-    { numero: "006", status: "Livre", vendedor: "Maria", cliente: "-", total: 0 },
-    { numero: "007", status: "Reservada", vendedor: "-", cliente: "Gabriel", total: 0 },
-    { numero: "008", status: "Reservada", vendedor: "-", cliente: "Gabriel", total: 0 },
-    { numero: "009", status: "Reservada", vendedor: "-", cliente: "Gabriel", total: 0 },
+    { numero: "001", andar: "Térreo", status: "Livre", vendedor: "João", cliente: "-", total: 0 },
+    { numero: "002", andar: "Térreo", status: "Livre", vendedor: "Maria", cliente: "-", total: 0 },
+    { numero: "003", andar: "1º Andar", status: "Ocupada", vendedor: "Ana", cliente: "Carlos", total: 27.5 },
+    { numero: "004", andar: "1º Andar", status: "Ocupada", vendedor: "Pedro", cliente: "Lucas", total: 21.7 },
+    { numero: "005", andar: "2º Andar", status: "Livre", vendedor: "João", cliente: "-", total: 0 },
+    { numero: "006", andar: "2º Andar", status: "Livre", vendedor: "Maria", cliente: "-", total: 0 },
+    { numero: "007", andar: "VIP", status: "Reservada", vendedor: "-", cliente: "Gabriel", total: 0 },
+    { numero: "008", andar: "VIP", status: "Reservada", vendedor: "-", cliente: "Gabriel", total: 0 },
+    { numero: "009", andar: "VIP", status: "Reservada", vendedor: "-", cliente: "Gabriel", total: 0 },
   ]);
 
   const [filtro, setFiltro] = useState("Todas");
@@ -35,13 +35,13 @@ export default function Mesa() {
 
   return (
     <div className="p-4 space-y-5">
-      {/* ===== FILTROS ===== */}
+      {/* FILTROS */}
       <div className="flex gap-3 flex-wrap">
         {["Todas", "Livre", "Ocupada", "Fechamento", "Reservada"].map((status) => (
           <button
             key={status}
             onClick={() => setFiltro(status)}
-            className={`px-4 py-1.5 rounded-full text-sm font-semibold transition
+            className={`px-4 py-1.5 rounded-full text-sm font-semibold
               ${
                 filtro === status
                   ? "bg-[#FF7E29] text-white"
@@ -53,23 +53,22 @@ export default function Mesa() {
         ))}
       </div>
 
-      {/* ===== GRID DE MESAS ===== */}
+      {/* GRID DE MESAS */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-4">
         {filtrarMesas().map((mesa) => (
           <div
             key={mesa.numero}
             onClick={() => abrirDetalhesMesa(mesa.numero)}
-            className={`${getBg(
-              mesa.status
-            )} text-white rounded-xl p-4 cursor-pointer shadow-lg
+            className={`${getBg(mesa.status)} text-white rounded-xl p-4 cursor-pointer shadow-lg
               hover:scale-[1.03] transition-transform relative`}
           >
-            {/* Número da mesa */}
-            <div className="absolute top-2 right-3 text-sm font-bold opacity-80">
-              #{mesa.numero}
+            {/* Número + andar */}
+            <div className="absolute top-2 right-3 text-right text-xs font-bold opacity-90">
+              <div>Mesa #{mesa.numero}</div>
+              <div>{mesa.andar}</div>
             </div>
 
-            {/* Ícone central */}
+            {/* Ícone */}
             <div className="flex justify-center my-4">
               <FiUsers className="text-5xl opacity-90" />
             </div>

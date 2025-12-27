@@ -9,23 +9,22 @@ export default function Layout() {
   const sidebarWidth = collapsed ? 80 : 256;
   const location = useLocation();
 
-  // Páginas que usam HeaderPDV
   const PDV_PAGES = ["/pdv", "/mesa"];
-
   const useHeaderPDV = PDV_PAGES.includes(location.pathname);
 
   return (
-    <div className="flex w-screen h-screen overflow-hidden">
+    <div className="flex w-screen h-screen overflow-hidden bg-gray-100">
       <SideBar collapsed={collapsed} setCollapsed={setCollapsed} />
 
       <div
         style={{ width: `calc(100vw - ${sidebarWidth}px)` }}
         className="flex flex-col transition-all duration-300"
       >
-        {/* Header único e correto */}
+        {/* HEADER */}
         {useHeaderPDV ? <HeaderPDV /> : <Header collapsed={collapsed} />}
 
-        <main className="pt-16 px-6 w-full h-full overflow-auto">
+        {/* CONTEÚDO */}
+        <main className="pt-4 px-6 flex-1 overflow-auto">
           <Outlet />
         </main>
       </div>
