@@ -7,10 +7,12 @@ import HeaderPDV from "../components/Header/HeaderPDV";
 export default function Layout() {
   const [collapsed, setCollapsed] = useState(false);
   const sidebarWidth = collapsed ? 80 : 256;
-  const location = useLocation(); // pega a rota atual
+  const location = useLocation();
 
-  // Se estiver na página /pdv, usa apenas HeaderPDV
-  const isPDV = location.pathname === "/pdv";
+  // Páginas que usam HeaderPDV
+  const PDV_PAGES = ["/pdv", "/mesa"];
+
+  const useHeaderPDV = PDV_PAGES.includes(location.pathname);
 
   return (
     <div className="flex w-screen h-screen overflow-hidden">
@@ -20,10 +22,10 @@ export default function Layout() {
         style={{ width: `calc(100vw - ${sidebarWidth}px)` }}
         className="flex flex-col transition-all duration-300"
       >
-        {/* Header: apenas HeaderPDV na página /pdv */}
-        {isPDV ? <HeaderPDV /> : <Header collapsed={collapsed} />}
+        {/* Header único e correto */}
+        {useHeaderPDV ? <HeaderPDV /> : <Header collapsed={collapsed} />}
 
-        <main className="pt-20 px-6 w-full h-full overflow-auto">
+        <main className="pt-16 px-6 w-full h-full overflow-auto">
           <Outlet />
         </main>
       </div>

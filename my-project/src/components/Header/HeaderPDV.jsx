@@ -5,14 +5,14 @@ import { NavLink } from "react-router-dom";
 export default function HeaderPDV() {
   const menuItems = [
     { name: "Caixa", icon: <FiBox className="text-xl" />, path: "/pdv" },
-    { name: "Mesa", icon: <FiMonitor className="text-xl" />, path: "/pdv/mesa" },
+    { name: "Mesa", icon: <FiMonitor className="text-xl" />, path: "/mesa" },
     { name: "Comanda", icon: <FiClipboard className="text-xl" />, path: "/pdv/comanda" },
     { name: "Pedido", icon: <FiShoppingCart className="text-xl" />, path: "/pdv/pedido" },
     { name: "Delivery", icon: <FiTruck className="text-xl" />, path: "/pdv/delivery" },
   ];
 
   return (
-    <header className="h-16 px-4 sm:px-6 lg:px-8 flex items-center mt-4">
+    <header className="h-16 px-4 sm:px-6 lg:px-8 flex items-center mt-2">
       <div className="w-full h-full rounded-2xl bg-[#033153] shadow-2xl flex items-center justify-between px-4 sm:px-6 lg:px-8">
 
         {/* Menu à esquerda */}
@@ -32,10 +32,13 @@ export default function HeaderPDV() {
                 <span className="hidden sm:inline">{item.name}</span>
               </div>
 
-              {/* Barra laranja centralizada embaixo */}
+              {/* Barra laranja centralizada embaixo do item ativo */}
               <span
-                className="absolute bottom-0 left-15 w-10 h-1 bg-[#FF7E29] rounded-t transition-all"
-                style={{ transform: "translateX(-50%)", opacity: window.location.pathname === item.path ? 1 : 0 }}
+                className="absolute bottom-0 left-1/2 w-10 h-1 bg-[#FF7E29] rounded-t transition-all"
+                style={{
+                  transform: "translateX(-50%)",
+                  opacity: window.location.pathname === item.path ? 1 : 0,
+                }}
               />
             </NavLink>
           ))}
